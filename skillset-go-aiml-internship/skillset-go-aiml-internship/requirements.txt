@@ -1,0 +1,28 @@
+# Core
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+jupyter
+
+# Week 2 - PyTorch
+torch
+torchvision
+
+# Week 3 - TensorFlow/Keras
+tensorflow
+
+# Week 4 - GenAI / Agents
+langchain
+langchain-community
+langgraph
+langsmith
+faiss-cpu
+# chromadb          # alternative to faiss-cpu
+python-dotenv
+openai               # or another LLM provider SDK
+
+# Utility
+requests
+tqdm
