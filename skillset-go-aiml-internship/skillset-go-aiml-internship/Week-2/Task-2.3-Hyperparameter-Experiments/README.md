@@ -8,20 +8,18 @@ Run controlled experiments (one or two changes at a time) across learning rate, 
 - PyTorch (reuse Task 2.1/2.2 model)
 
 ## Work Completed
-- [ ] Keep dataset, architecture and evaluation procedure fixed
-- [ ] Test several learning rates; note too-slow / stable / unstable behaviour
-- [ ] Compare at least two optimizers under similar conditions
-- [ ] Try more than one batch size and record the effect
-- [ ] Vary epochs and watch for under/overfitting
-- [ ] Keep an experiment table: run ID, settings, metrics, notes
-- [ ] Choose the final configuration only after reviewing the experiment history
+Keep dataset, architecture and evaluation procedure fixed
 
-## Deliverables
-- Experiment log with a comparison table detailed enough for someone else to reproduce the key runs
+Test several learning rates; note too-slow / stable / unstable behaviour
 
-## Key Learnings
-Write 3-5 points describing what you learned.
+Compare at least two optimizers under similar conditions
 
-## Submission Status
-Status: Pending
-Submitted On:
+ Try more than one batch size and record the effect
+
+ Vary epochs and watch for under/overfitting
+
+ Keep an experiment table: run ID, settings, metrics, notes
+
+ Choose the final configuration only after reviewing the experiment history
+
+
