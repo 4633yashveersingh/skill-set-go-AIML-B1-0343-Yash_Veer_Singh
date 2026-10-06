@@ -1,0 +1,9 @@
+employee_id,name,department,salary,start_date,active,notes
+1,Alice,Engineering,95000,2021-03-15,true,
+2,Bob,Marketing,"72,500",2020-07-01,yes,
+3,Carol,Engineering,101000,2019-11-22,true,team lead
+4,Dan,Marketing,N/A,2022-01-10,no,
+5,Eve,HR,68000,2021-03-15,false,
+6,Frank,Engineering,95000,bad-date,true,
+1,Alice,Engineering,95000,2021-03-15,true,
+8,,HR,71000,2020-05-30,yes,
