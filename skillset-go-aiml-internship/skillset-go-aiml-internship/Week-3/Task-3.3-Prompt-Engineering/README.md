@@ -8,20 +8,18 @@ Treat prompting as testing and iteration across reasoning, extraction, summariza
 - Spreadsheet or Markdown table for the eval sheet
 
 ## Work Completed
-- [ ] Choose four use cases: reasoning, extraction, summarization, coding
-- [ ] Write a baseline prompt for each and test on fixed examples
-- [ ] Improve with clearer instructions, context, constraints, examples or structured outputs
-- [ ] Keep test inputs consistent across iterations
-- [ ] Record what changed and what improved or degraded
-- [ ] Define evaluation criteria: correctness, completeness, format adherence, clarity, code validity
-- [ ] Save representative outputs so the iteration history is visible
+Choose four use cases: reasoning, extraction, summarization, coding
 
-## Deliverables
-- A prompt evaluation sheet with versions, inputs, outputs/outcomes, and notes on why each iteration changed
+ Write a baseline prompt for each and test on fixed examples
+ 
+ Improve with clearer instructions, context, constraints, examples or structured outputs
+ 
+ Keep test inputs consistent across iterations
+ 
+ Record what changed and what improved or degraded
+ 
+ Define evaluation criteria: correctness, completeness, format adherence, clarity, code validity
+ 
+ Save representative outputs so the iteration history is visible
 
-## Key Learnings
-Write 3-5 points describing what you learned.
 
-## Submission Status
-Status: Pending
-Submitted On:
