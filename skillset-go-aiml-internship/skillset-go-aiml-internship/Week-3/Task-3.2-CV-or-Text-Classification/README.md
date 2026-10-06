@@ -9,20 +9,16 @@ Take a CV or text-classification problem beyond tutorial level: task-specific pr
 - Jupyter Notebook
 
 ## Work Completed
-- [ ] Write the problem statement first: what's being classified, what makes a prediction useful
-- [ ] Inspect class counts, missing data, duplicates, obvious label-quality issues
-- [ ] Build a baseline before adding complexity
-- [ ] Train a TensorFlow/Keras model; evaluate with appropriate metrics
-- [ ] Inspect misclassified examples and group errors when patterns appear
-- [ ] Build a reproducible inference step that takes a new sample and returns a prediction
-- [ ] Document limitations and practical next improvements
+ Write the problem statement first: what's being classified, what makes a prediction useful
+ 
+   Inspect class counts, missing data, duplicates, obvious label-quality issues
+   
+   Build a baseline before adding complexity
+   
+   Train a TensorFlow/Keras model; evaluate with appropriate metrics
+   
+   Inspect misclassified examples and group errors when patterns appear
+   
+   Build a reproducible inference step that takes a new sample and returns a prediction
 
-## Deliverables
-- Working notebook plus trained model file, documented well enough for a reviewer to run and understand it
 
-## Key Learnings
-Write 3-5 points describing what you learned.
-
-## Submission Status
-Status: Pending
-Submitted On:
