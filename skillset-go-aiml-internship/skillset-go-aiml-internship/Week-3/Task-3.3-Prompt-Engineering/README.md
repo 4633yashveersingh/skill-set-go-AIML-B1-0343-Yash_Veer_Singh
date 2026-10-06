@@ -4,7 +4,6 @@
 Treat prompting as testing and iteration across reasoning, extraction, summarization and coding tasks, with a defined evaluation rubric.
 
 ## Tools Used
-- Any LLM interface/API
 - Spreadsheet or Markdown table for the eval sheet
 
 ## Work Completed
