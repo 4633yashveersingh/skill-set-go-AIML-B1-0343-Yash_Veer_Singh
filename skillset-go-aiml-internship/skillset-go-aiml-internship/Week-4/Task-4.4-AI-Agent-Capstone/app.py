@@ -1,5 +1,4 @@
-from langgraph_workflow import build_agent
-from langgraph_workflow import build_agent
+
 import os
 import streamlit as st
 import torch
@@ -82,7 +81,131 @@ def load_model():
 
 retriever = build_retriever()
 tokenizer, model = load_model()
-agent = build_agent(retriever, tokenizer, model)
+
+
+class AgentState(TypedDict, total=False):
+    question: str
+    route: str
+    context: str
+    answer: str
+    sources: list
+
+
+def route_question(state: AgentState):
+    question = state["question"].lower()
+
+    if "employee" in question or "employees" in question:
+        return {"route": "unsupported"}
+
+    return {"route": "retrieve"}
+
+
+def unsupported_answer(state: AgentState):
+    return {
+        "answer": (
+            "The document does not provide enough information "
+            "to answer this question reliably."
+        ),
+        "sources": []
+    }
+
+
+def retrieve_documents(state: AgentState):
+    docs = retriever.invoke(state["question"])
+    context = "\n\n".join(doc.page_content for doc in docs)
+    sources = list({
+        doc.metadata.get("source", "Unknown source")
+        for doc in docs
+    })
+
+    return {"context": context, "sources": sources}
+
+
+def generate_answer(state: AgentState):
+    prompt = f"""Answer the question using only the supplied context.
+If the context does not contain the answer, say:
+The document does not provide enough information.
+
+Do not invent financial figures.
+
+Context:
+{state['context']}
+
+Question: {state['question']}
+Answer:"""
+
+    inputs = tokenizer(
+        prompt,
+        return_tensors="pt",
+        truncation=True,
+        max_length=512
+    )
+
+    with torch.no_grad():
+        output = model.generate(
+            **inputs,
+            max_new_tokens=80,
+            num_beams=4,
+            do_sample=False
+        )
+
+    answer = tokenizer.decode(
+        output[0],
+        skip_special_tokens=True
+    ).strip()
+
+    # Basic evidence check: reject answers with no meaningful overlap.
+    context_words = set(state["context"].lower().split())
+    answer_words = set(answer.lower().split())
+    overlap = context_words.intersection(answer_words)
+
+    if not answer or len(overlap) < 2:
+        answer = (
+            "I couldn't verify a reliable answer from the retrieved "
+            "report text. Please try a more specific question."
+        )
+
+    return {"answer": answer}
+
+
+def verify_answer(state: AgentState):
+    answer = state.get("answer", "").strip()
+
+    if not answer:
+        answer = (
+            "The document does not provide enough information "
+            "to answer this question reliably."
+        )
+
+    return {"answer": answer}
+
+
+workflow = StateGraph(AgentState)
+
+workflow.add_node("router", route_question)
+workflow.add_node("retrieve", retrieve_documents)
+workflow.add_node("generate", generate_answer)
+workflow.add_node("verify", verify_answer)
+workflow.add_node("unsupported", unsupported_answer)
+
+workflow.add_edge(START, "router")
+
+workflow.add_conditional_edges(
+    "router",
+    lambda state: state["route"],
+    {
+        "retrieve": "retrieve",
+        "unsupported": "unsupported"
+    }
+)
+
+workflow.add_edge("retrieve", "generate")
+workflow.add_edge("generate", "verify")
+workflow.add_edge("verify", END)
+workflow.add_edge("unsupported", END)
+
+agent = workflow.compile()
+
 
 st.subheader("Ask the financial report")
 
